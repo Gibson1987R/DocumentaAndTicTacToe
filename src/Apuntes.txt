@@ -1,0 +1,90 @@
+2----Presentando JSX
+****¿Por qué JSX? 
+
+Mira la siguientes expresión 
+
+const element = <h1>Hello, world!</h1>;
+
+React acepta el hecho de que la lógica de renderizado está intrínsecamente unida a la lógica de la interfaz de usuario: cómo se manejan los eventos, cómo cambia el estado con el tiempo y cómo se preparan los datos para su visualización.
+En lugar de separar artificialmente tecnologías poniendo el maquetado y la lógica en archivos separados, React separa intereses con unidades ligeramente acopladas llamadas “componentes” que contienen ambas. Volveremos a los componentes en otra sección, pero si aún no te sientes cómodo maquetando en JS, esta charla podría convencerte de lo contrario.
+
+
+****Insertando expresiones en JSX
+Puedes poner cualquier expresión de JavaScript dentro de llaves en JSX. 
+
+Por ejemplo, 2 + 2, user.firstName, o formatName(user) son todas expresiones válidas de Javascript.
+
+****JSX también es una expresión
+Después de compilarse, las expresiones JSX se convierten en llamadas a funciones JavaScript regulares y se evalúan en objetos JavaScript.
+
+Esto significa que puedes usar JSX dentro de declaraciones if y bucles for, asignarlo a variables, aceptarlo como argumento, y retornarlo desde dentro de funciones.
+
+****Especificando atributos con JSX
+Puedes utilizar comillas para especificar strings literales como atributos.
+
+const element = <img src='./componentes/images/perrito.jpg'</img>;
+
+También puedes usar llaves para insertar una expresión JavaScript en un atributo.
+
+const element = <img src={user.avatarUrl}></img>;
+
+Dado que JSX es más cercano a JavaScript que a HTML, React DOM usa la convención de nomenclatura camelCase en vez de nombres de atributos HTML.
+
+Por ejemplo, class se vuelve className en JSX, y tabindex se vuelve tabIndex.
+
+****JSX previene ataques de inyección
+
+const title = response.potentiallyMaliciousInput;
+// Esto es seguro:
+const element = <h1>{title}</h1>;
+
+Todo es convertido en un string antes de ser renderizado. Esto ayuda a prevenir vulnerabilidades XSS (cross-site-scripting).
+
+****JSX representa objetos
+
+Estos dos ejemplos son idénticos:
+
+const element = (
+  <h1 className="greeting">
+    Hello, world!
+  </h1>
+);
+const element = React.createElement(
+  'h1',
+  {className: 'greeting'},
+  'Hello, world!'
+);
+
+// Nota: Esta estructura está simplificada
+const element = {
+  type: 'h1',
+  props: {
+    className: 'greeting',
+    children: 'Hello, world!'
+  }
+};
+
+Estos objetos son llamados “Elementos de React”. Puedes pensar en ellos como descripciones de lo que quieres ver en pantalla.
+
+
+3----Renderizando elementos
+
+Para renderizar un elemento de React en un nodo raíz del DOM, pasa ambos a ReactDOM.render():
+
+****Actualizando el elemento renderizado
+Los elementos de React son inmutables. Una vez creas un elemento, no puedes cambiar sus hijos o atributos.
+
+****React solo actualiza lo que es necesario
+React DOM compara el elemento y sus hijos con el elemento anterior, y solo aplica las actualizaciones del DOM que son necesarias para que el DOM esté en el estado deseado.
+
+4----Componentes y propiedades
+
+Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada.
+Conceptualmente, los componentes son como las funciones de JavaScript. Aceptan entradas arbitrarias (llamadas “props”) y devuelven a React elementos que describen lo que debe aparecer en la pantalla.
+
+Cuando React ve un elemento representando un componente definido por el usuario, pasa atributos JSX e hijos a este componente como un solo objeto. Llamamos a este objeto “props”.
+
+Nota: Comienza siempre los nombres de componentes con una letra mayúscula.
+
+React trata los componentes que empiezan con letras minúsculas como etiquetas del DOM. Por ejemplo, <div /> representa una etiqueta div HTML pero <Welcome /> representa un componente y requiere que Welcome esté definido.
+

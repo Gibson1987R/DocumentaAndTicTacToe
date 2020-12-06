@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Funcional from './components/Funcional';
+import Clases from './components/Clases';
 
 function App() {
   return (
@@ -18,6 +20,10 @@ function App() {
           Learn React
         </a>
       </header>
+      <Funcional
+      name ='Gibson'/>
+      <Clases
+      name ='Samuel'/>
     </div>
   );
 }
