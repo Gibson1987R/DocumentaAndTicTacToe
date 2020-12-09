@@ -88,3 +88,137 @@ Nota: Comienza siempre los nombres de componentes con una letra mayúscula.
 
 React trata los componentes que empiezan con letras minúsculas como etiquetas del DOM. Por ejemplo, <div /> representa una etiqueta div HTML pero <Welcome /> representa un componente y requiere que Welcome esté definido.
 
+****Composición de componentes
+Los componentes pueden referirse a otros componentes en su salida. Esto nos permite utilizar la misma abstracción de componente para cualquier nivel de detalle. Un botón, un cuadro de diálogo, un formulario, una pantalla: en aplicaciones de React, todos son expresados comúnmente como componentes.
+
+****Extracción de componentes
+
+function Comment(props) {
+  return (
+    <div className="Comment">
+      <div className="UserInfo">
+        <img className="Avatar"
+          src={props.author.avatarUrl}
+          alt={props.author.name}
+        />
+        <div className="UserInfo-name">
+          {props.author.name}
+        </div>
+      </div>
+      <div className="Comment-text">
+        {props.text}
+      </div>
+      <div className="Comment-date">
+        {formatDate(props.date)}
+      </div>
+    </div>
+  );
+}
+Acepta author (un objeto), text (un string), y date (una fecha) como props, y describe un comentario en una web de redes sociales.
+
+Extraer componentes puede parecer un trabajo pesado al principio, pero tener una paleta de componentes reutilizables vale la pena en aplicaciones más grandes. Una buena regla en general, es que si una parte de su interfaz de usuario se usa varias veces (Button, Panel, Avatar), o es lo suficientemente compleja por sí misma (App, FeedStory, Comment), es buen candidato para extraerse en un componente independiente.
+
+Todos los componentes de React deben actuar como funciones puras con respecto a sus props.
+
+Por supuesto, las interfaces de usuario de las aplicaciones son dinámicas y cambian con el tiempo.
+
+El estado le permite a los componentes de React cambiar su salida a lo largo del tiempo en respuesta a acciones del usuario, respuestas de red y cualquier otra cosa, sin violar esta regla.
+
+----Estado y ciclo de vida
+
+El estado es similar a las props, pero es privado y está completamente controlado por el componente.
+
+****Convertir una función en una clase
+
+Se puede convertir un componente de función como Clock en una clase en cinco pasos:
+
+Crear una clase ES6 con el mismo nombre que herede de React.Component.
+Agregar un único método vacío llamado render().
+Mover el cuerpo de la función al método render().
+Reemplazar props con this.props en el cuerpo de render().
+Borrar el resto de la declaración de la función ya vacía.
+
+Esto nos permite utilizar características adicionales como el estado local y los métodos de ciclo de vida.
+
+****Agregar estado local a una clase
+Reemplazar this.props.date con this.state.date en el método render():
+
+****Añadir un constructor de clase que asigne el this.state inicial: Pasandole las props en super(props);
+
+****Agregar métodos de ciclo de vida a una clase
+
+En aplicaciones con muchos componentes, es muy importante liberar recursos tomados por los componentes cuando se destruyen.
+
+Cuando se renderice en el DOM por primera vez. Esto se llama «montaje» en React.
+
+También queremos borrar el DOM producido por el componete cada vez que este se elimine. Esto se llama «desmontaje» en React.
+
+Podemos declarar métodos especiales en la clase del componente para ejecutar algún código cuando un componente se monta y desmonta: estos se hacen justo debajo del constructor y antes del render.
+
+Estos metodos son llamados ciclos de vida.
+
+El método componentDidMount() se ejecuta después que la salida del componente ha sido renderizada en el DOM. Este es un buen lugar para configurar un temporizador:
+
+React invoca al método de ciclo de vida componentWillUnmount(), por lo que el temporizador se detiene.
+
+Si bien this.props es configurado por el mismo React y this.state tiene un significado especial, eres libre de añadir campos adicionales a la clase manualmente si necesitas almacenar algo que no participa en el flujo de datos.
+
+Utilizará this.setState() para programar actualizaciones al estado local del componente.
+
+°°°°Flujo de datos desde el estado.
+
+1 PASAMOS el componente al ReactDOM.
+2 el componente llama a su constructor.
+3 el constructor pasa a react la data inicializada del state.
+
+4 react invoca al render() del componente.
+5 react sabe que va a mostrar en pantalla.
+6 react actuliza el DOM coincidiendo con la data inicializada a la salida del componente.
+
+7 react invoca componentDidMount() a la salida del componete.
+8 este método entonces realiza o llama funcionalidades definidas.
+
+9 las funcionalidades planifican la actualización de la interfaz invocando a setState().
+
+10 react se entera que cambió el estado con setState().
+
+11 react vuelve a invocar al render() del componente.
+12 react sabe que debe mostrar en pantalla.
+13 react actualiza el DOM pero esta vez this.state en el render() posee data actualizada del estado a la salida del componente. 
+
+14 repite el flujo constantemente.
+
+Si en alguún momento se elimina el componente del DOM entoces react invoca al método componentWillUnmount().
+
+
+****Usar el estado correctamente
+
+no se modifica el estado directamente en su lugar se utiliza setState().
+
+el único lugar donde puedes asignar this.state es en el constructor.
+
+Debido a que this.props y this.state pueden actualizarse de forma asincrónica, no debes confiar en sus valores para calcular el siguiente estado.
+
+las actualizaciones de estado se fusionan.Cuando invocas a setState(), React combina el objeto que proporcionaste con el estado actual.
+
+Por ejemplo, tu estado puede contener varias variables independientes:
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      comments: []
+    };
+  }
+
+La fusión es superficial, asi que this.setState({comments}) deja intacto a this.state.posts, pero reemplaza completamente this.state.comments.
+
+Los datos fluyen hacia abajo
+
+ni los padres ni los hijos pueden saber si otro componente tiene estado o no y no importa si se declara con función o como clase. 
+El estado es privado y no es accesible desde otro componente excepto de aquel que lo posee y lo asigna.
+Podemos elegir pasar el estado de un componente como props a sus componentes hijos.
+El flujo de datos es completamente descendente o unidireccional.
+Los datos o interfaz de usuario solo pueden afectar a los componentes descendentes.
+
+
