@@ -221,4 +221,61 @@ Podemos elegir pasar el estado de un componente como props a sus componentes hij
 El flujo de datos es completamente descendente o unidireccional.
 Los datos o interfaz de usuario solo pueden afectar a los componentes descendentes.
 
+-----Manejando eventos
+Manejar eventos en elementos de React es muy similar a manejar eventos con elementos del DOM. Hay algunas diferencias de sintaxis:
 
+Los eventos de React se nombran usando camelCase, en vez de minúsculas.
+Con JSX pasas una función como el manejador del evento, en vez de un string.
+
+DOM
+<button onclick="activateLasers()">
+  Activate Lasers
+</button>
+
+React
+<button onClick={activateLasers}>
+  Activate Lasers
+</button>
+
+Otra diferencia es que en React no puedes retornar false para prevenir el comportamiento por defecto. Debes, explícitamente, llamar preventDefault. Para evitar que la página redirecciones a otra.
+
+Por lo general no se necesita agregar escuchadores de eventos (addEventListener) a un elemento del DOM después de que esta ha sido creado. Solo debes proveerse un manejador de eventos cuando el elemento se renderice inicialmente.
+
+Cuando utilizamos Component clases el patron común es pasar manejadores de eventos como métodos de la clase.
+
+Para esto hacemos un constructor dentro del cual inicialiamos un estado y bindeamos el manejador.
+
+Después del constructor hacemos el método handle o manejador el cual en su tarea llamará a setState() actualizando el estado según detecte el evento.
+
+Luego dentro del en render() en el elemento que queremos retornar, colocamos el evento onClick, onSubmit, onEtc. Pero dentro de llaves hacemos referencia a este método manejador del evento con {this.handleEtc} 
+Ejemplo: 
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+
+  Es importante recordar que hay que enlazar los métodos de las clases puesto que ellos no esta enlazados por defecto, así que cuando pasamos algún método sin usar parentesis después de este; como en el caso de <button onClick={this.handleClick}> el mismo debe estar enlazados o bindeado en el constructor porque sino this estaría undefined.
+
+  Una forma de evitar el bindeo es convertir los métodos a función flecha asignado a una variable con el nombre del evento.
+
+Sin bindeo
+    handleClick = () =>{
+    this.setState(state => ({
+      isToggleOn: !this.state.isToggleOn
+    }));
+    // console.log(`Estoy ${this.state.isToggleOn}`)
+    console.log(`Estoy ${this.state.isToggleOn ? 'Encendido' :'Apadado'}`)
+  }
+
+Con bindeo
+  
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !this.state.isToggleOn
+    }));
+    // console.log(`Estoy ${this.state.isToggleOn}`)
+    console.log(`Estoy ${this.state.isToggleOn ? 'Encendido' :'Apadado'}`)
+  }

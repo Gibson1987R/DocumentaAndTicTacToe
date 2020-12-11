@@ -5,6 +5,8 @@ import Clases from './components/Clases';
 import Extraccion from './components/Extraccion';
 import Clock from './components/Clock';
 import'../node_modules/bootstrap/dist/css/bootstrap-grid.css'
+import Eventos from './components/Eventos';
+import EncendidoApagado from './components/EncendidoApagado';
 
 
 
@@ -41,6 +43,8 @@ function App() {
         <Clock/>
       </div>
         <div className='col-6'>
+          <EncendidoApagado/>
+          <Eventos/>
           <Funcional
           name ='Gibson'/>
           <Clases
