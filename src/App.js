@@ -11,6 +11,8 @@ import Condicional from './components/Condicional';
 import ControlCondicional from './components/ControlCondicional';
 import LineaCondicional from './components/LineaCondicional';
 import NoQuieroCondicional from './NoQuieroCondicional';
+import NumberList from './components/NumberList';
+import KeysIds from './components/KeysIds';
 
 
 
@@ -24,6 +26,13 @@ const comment = {
 };
 
 const messages = ['React', 'Re: React', 'Re: RE: React']
+
+const numbers = [1, 2, 3, 4, 5];
+
+const posts = [
+  {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
+  {id: 2, title: 'Installation', content: 'You can install React from npm'}
+];
 
 function App() {
   return (
@@ -45,7 +54,8 @@ function App() {
         </header>
         <Clock/>
         <Clock/>
-        <Clock/>
+        <NumberList numbers={numbers} />
+        <KeysIds posts={posts}/>
       </div>
         <div className='col-6'>
           <EncendidoApagado/>

@@ -302,3 +302,31 @@ Otro método para el renderizado condicional de elementos en una línea es usar 
 Al igual que en JavaScript, depende de ti elegir un estilo apropiado en base a lo que tu y tu equipo consideran más legible. Recuerda también que cuando las condiciones se vuelven demasiado complejas, puede ser un buen momento para extraer un componente.
 
 El devolver null desde el método render de un componente no influye en la activación de los métodos del ciclo de vida del componente. Por ejemplo componentDidUpdate seguirá siendo llamado.
+
+-----Listas y keys
+
+const numbers = [1, 2, 3, 4, 5];
+const doubled = numbers.map((number) => number * 2);
+console.log(doubled);
+
+Este código muestra [2, 4, 6, 8, 10] a la consola.
+
+En React, transformar arrays en listas de elementos es casi idéntico.
+
+Cuando renderzamos una lista de componentes utilizando la función map() es necesario pasar una key por cada elemento que presentaremos.
+La key es un atributo especial string que debe ser incluido al crear listas.
+
+La mejor forma de elegir una key es usando un string que identifique únicamente a un elemento de la lista entre sus hermanos. Habitualmente vas a usar IDs de tus datos como key. Cuando no tengas IDs estables para renderizar, puedes usar el índice del ítem como una key como último recurso. No recomendamos usar índices para keys si el orden de los ítems puede cambiar.
+
+El uso correcto de las keys se da cuando consideramos que los elementos dentro de map() necesitan keys.
+
+Las keys solo necesitan ser únicas entre sus hermanos, no necesitan ser únicas globalmente.
+
+Las key sirven como una sugerencia pero no pasan a sus componentes. Si necesitas usar el mismo valor en tu componente, pásasela explícitamente como una propiedad con un nombre diferente:
+
+const content = posts.map((post) =>
+  <Post
+    key={post.id}
+    id={post.id}
+    title={post.title} />
+);

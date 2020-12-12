@@ -172,6 +172,20 @@ Si en alguún momento se elimina el componente del DOM entoces react invoca al m
 
 // -------- fin de la clase 5
 
+// const numbers = [1, 2, 3, 4, 5];
+// const listItems = numbers.map((number) =>
+//   <li>{number}</li>
+// )
+
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <ul>{listItems}</ul>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
+
+// -------fin de la clase 8
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
