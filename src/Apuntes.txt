@@ -279,3 +279,26 @@ Con bindeo
     // console.log(`Estoy ${this.state.isToggleOn}`)
     console.log(`Estoy ${this.state.isToggleOn ? 'Encendido' :'Apadado'}`)
   }
+
+  ----Renderizado condicional
+  Podemos tener distintos componentes con comportamientos diferentes; y podemos rederizar algunos de dependiendo del estado de la aplicación.
+
+Trabajando de la misma forma cómo trabajariamos con if o el operador ternario.
+
+Además podemos guardar los elementos en variables para renderizarlo cuando queramos sin que la demas partes del componente cambien.
+
+Podemos mejorar los renderizados condicionales, de tal manera que estos sean en una sola linea.
+
+&&
+Esto funciona porque en JavaScript, true && expresión siempre evalúa a expresión, y false && expresión siempre evalúa a false.
+
+Por eso, si la condición es true, el elemento justo después de && aparecerá en el resultado. Si es false, React lo ignorará.
+
+Ten en cuenta que retornar expresiones falsas hará que el elemento después de ’&&’ sea omitido pero retornará el valor falso. 
+
+If-Else en una línea con operador condicional
+Otro método para el renderizado condicional de elementos en una línea es usar el operador condicional condición ? true : false de JavaScript.
+
+Al igual que en JavaScript, depende de ti elegir un estilo apropiado en base a lo que tu y tu equipo consideran más legible. Recuerda también que cuando las condiciones se vuelven demasiado complejas, puede ser un buen momento para extraer un componente.
+
+El devolver null desde el método render de un componente no influye en la activación de los métodos del ciclo de vida del componente. Por ejemplo componentDidUpdate seguirá siendo llamado.

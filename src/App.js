@@ -7,6 +7,10 @@ import Clock from './components/Clock';
 import'../node_modules/bootstrap/dist/css/bootstrap-grid.css'
 import Eventos from './components/Eventos';
 import EncendidoApagado from './components/EncendidoApagado';
+import Condicional from './components/Condicional';
+import ControlCondicional from './components/ControlCondicional';
+import LineaCondicional from './components/LineaCondicional';
+import NoQuieroCondicional from './NoQuieroCondicional';
 
 
 
@@ -19,6 +23,7 @@ const comment = {
   },
 };
 
+const messages = ['React', 'Re: React', 'Re: RE: React']
 
 function App() {
   return (
@@ -56,6 +61,12 @@ function App() {
           text={comment.text}
           author={comment.author}
           />
+          <Condicional
+          isLoggedIn={true}/>
+          <ControlCondicional/>
+          <LineaCondicional 
+          unreadMessages={messages}/>
+          <NoQuieroCondicional/>
         </div>
     </div>
   );
