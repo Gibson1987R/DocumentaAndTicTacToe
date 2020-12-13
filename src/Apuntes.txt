@@ -330,3 +330,54 @@ const content = posts.map((post) =>
     id={post.id}
     title={post.title} />
 );
+
+
+-----Formularios
+Los elementos de formularios en HTML funcionan un poco diferente a otros elementos del DOM en React, debido a que los elementos de formularios conservan naturalmente algún estado interno.
+
+Los formularios por defecto tienen un comportamiento de navegar a otra página cuando se envían. React trae este mismo comportamiento; pero en la mayoría de los casos es preferible tener una función JS que se encargue del envío del formulario, y que tenga acceso a los datos que usuario introdujo en el mismo. Esta técnica se conoce con el nombre de componentes controlados.
+
+****Componentes controlados
+
+Los elementos de formulario como input textarea y select; mantienen y actualizan sus propios estados según la interacción del usuario. Por otro lado React para mantener el estado mutable hace uso de setState().
+Podemos combinar estas dos opciones, haciendo que React sea la única fuente de la verdad; de esta manera los componentes que rendericen un formulario controlan lo que pasa en este y las subsecuentes entradas del usuario. Esto es lo que se conoce como componentes controlados.
+
+El atributo value al ser agregado en nuestro elemento del formulario, el valor mostrado siempre vendrá del this.state.etc; haciendo de esta manera que la única fuente de la verdad sea React ya que handleChange corre cada vez que una tecla es oprimida para actualizar el estado y entonces este es actualizado mientras que el usuario escribe.
+
+En HTML, el elemento <textarea> define su texto por sus hijos:
+
+<textarea>
+  Hello there, this is some text in a text area
+</textarea>
+
+Pero en REACT el textarea puede ser escrito en una sola linea al utilizar el atributo value para definir su texto. Siendo de esta manera una etiqueta que se abra y se cierra en si misma.
+
+En HTML, <select> crea una lista desplegable. Por ejemplo, este HTML crea una lista desplegable de sabores:
+
+<select>
+  <option value="grapefruit">Grapefruit</option>
+  <option value="lime">Lime</option>
+  <option selected value="coconut">Coconut</option>
+  <option value="mango">Mango</option>
+</select>
+
+Ten en cuenta que la opción Coco es inicialmente seleccionada, debido al atributo selected. React, en lugar de utilizar el atributo selected, utiliza un atributo value en la raíz de la etiqueta select. Esto es más conveniente en un componente controlado debido a que solo necesitas actualizarlo en un solo lugar, por ejemplo:
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Pick your favorite flavor:
+          <select value={this.state.value} onChange={this.handleChange}>
+            <option value="grapefruit">Grapefruit</option>
+            <option value="lime">Lime</option>
+            <option value="coconut">Coconut</option>
+            <option value="mango">Mango</option>
+          </select>
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+
+En resumen, esto hace que <input type="text">, <textarea>, y <select> trabajen de manera similar, todos aceptan un atributo value el cual puedes usar para implementar un componente controlado.

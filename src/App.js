@@ -13,6 +13,7 @@ import LineaCondicional from './components/LineaCondicional';
 import NoQuieroCondicional from './NoQuieroCondicional';
 import NumberList from './components/NumberList';
 import KeysIds from './components/KeysIds';
+import FormularioOne from './components/FormularioOne';
 
 
 
@@ -77,6 +78,7 @@ function App() {
           <LineaCondicional 
           unreadMessages={messages}/>
           <NoQuieroCondicional/>
+          <FormularioOne/>
         </div>
     </div>
   );
