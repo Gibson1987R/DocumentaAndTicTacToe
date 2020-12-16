@@ -15,6 +15,7 @@ import NumberList from './components/NumberList';
 import KeysIds from './components/KeysIds';
 import FormularioOne from './components/FormularioOne';
 import LevelStateCalculador from './components/LevelStateCalculador';
+import FilterProductTable from './components/FilterableProductTable';
 
 
 
@@ -34,6 +35,15 @@ const numbers = [1, 2, 3, 4, 5];
 const posts = [
   {id: 1, title: 'Hello World', content: 'Welcome to learning React!'},
   {id: 2, title: 'Installation', content: 'You can install React from npm'}
+];
+
+const PRODUCTS = [
+  {category: 'Sporting Goods', price: '$49.99', stocked: true, name: 'Football'},
+  {category: 'Sporting Goods', price: '$9.99', stocked: true, name: 'Baseball'},
+  {category: 'Sporting Goods', price: '$29.99', stocked: false, name: 'Basketball'},
+  {category: 'Electronics', price: '$99.99', stocked: true, name: 'iPod Touch'},
+  {category: 'Electronics', price: '$399.99', stocked: false, name: 'iPhone 5'},
+  {category: 'Electronics', price: '$199.99', stocked: true, name: 'Nexus 7'}
 ];
 
 function App() {
@@ -59,7 +69,7 @@ function App() {
         <NumberList numbers={numbers} />
         <KeysIds posts={posts}/>
       </div>
-        <div className='col-6'>
+        {/* <div className='col-6'>
           <EncendidoApagado/>
           <Eventos/>
           <Funcional
@@ -81,6 +91,11 @@ function App() {
           <NoQuieroCondicional/>
           <FormularioOne/>
           <LevelStateCalculador/>
+        </div> */}
+        <div className='col-6'>
+          <FilterProductTable
+          products ={PRODUCTS}
+          />
         </div>
     </div>
   );
