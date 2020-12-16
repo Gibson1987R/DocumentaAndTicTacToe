@@ -14,6 +14,7 @@ import NoQuieroCondicional from './NoQuieroCondicional';
 import NumberList from './components/NumberList';
 import KeysIds from './components/KeysIds';
 import FormularioOne from './components/FormularioOne';
+import LevelStateCalculador from './components/LevelStateCalculador';
 
 
 
@@ -79,6 +80,7 @@ function App() {
           unreadMessages={messages}/>
           <NoQuieroCondicional/>
           <FormularioOne/>
+          <LevelStateCalculador/>
         </div>
     </div>
   );
