@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Inicial from './tutorial/Inicial';
 
 // const name ='Samuel Rosales';
 // const element = <h1>Hello, world!... Soy {name}</h1>
@@ -186,9 +187,15 @@ Si en alguún momento se elimina el componente del DOM entoces react invoca al m
 
 // -------fin de la clase 8
 
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Inicial/>
   </React.StrictMode>,
   document.getElementById('root')
 );
