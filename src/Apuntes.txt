@@ -402,3 +402,29 @@ Levantar el estado implica escribir más código “boilerplate” que los enfoq
 
 Si algo puede ser derivado de las propiedades o el estado, probablemente no debería estar en el estado. Por ejemplo, en vez de almacenar celsiusValue y fahrenheitValue, solamente almacenamos la última edición a temperature y scale. El valor de la otra entrada siempre puede ser calculado desde el método render(). Esto nos permite limpiar o aplicar un redondeo a la otra entrada sin perder la precisión en la entrada del usuario.
 
+-----Tutorial
+
+Nota: sobre los manejadores y las elementos preconstruidos vs personalizados
+
+El atributo onClick del elemento <button> del DOM tiene un significado especial para React porque es un componente pre-construido. Para componentes personalizados como Square, la nomenclatura la decides tú. Podríamos darle cualquier nombre al prop onClick de Square o al método handleClick de Board, y el código funcionaría de la misma forma. En React, sin embargo, es una convención usar los nombres on[Evento] para props que representan eventos y handle[Event] para los métodos que manejan los eventos.
+
+*****¿Por qué es importante la inmutabilidad?
+En el ejemplo de código anterior, sugerimos que usaras el método .slice() para crear una copia del array de squares para modificarlo en vez de modificar el array existente. Ahora discutiremos la inmutabilidad y porqué es importante aprenderla.
+
+Hay generalmente dos enfoques para cambiar datos. El primer enfoque es mutar los datos directamente cambiando sus valores. El segundo enfoque es reemplazar los datos con una nueva copia que tiene los cambios deseados.
+
+*****Cambio de datos con mutación
+var player = {score: 1, name: 'Jeff'};
+player.score = 2;
+// Ahora `player` es {score: 2, name: 'Jeff'}
+
+
+*****Cambio de datos sin mutación
+var player = {score: 1, name: 'Jeff'};
+
+var newPlayer = Object.assign({}, player, {score: 2});
+// Ahora `player` no ha cambiado, pero `newPlayer` es {score: 2, name: 'Jeff'}
+
+// O si usas la sintaxis propuesta de propagación de objeto, puedes escribir:
+// var newPlayer = {...player, score: 2};
+
