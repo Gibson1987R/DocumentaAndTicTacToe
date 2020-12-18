@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import { uid } from 'uid';
 // class Square extends React.Component {
 //   // constructor(props){
 //   //   super(props);
@@ -74,13 +75,26 @@ class Board extends React.Component {
   // }
   renderSquare(i) {
     return (
-    <Square 
+    <Square
+    key={uid()}
     value ={this.props.squares[i]} 
     onClick={()=> this.props.onClick(i)}
     />);
   }
 
   render() {
+    // Use two loops to make the squares
+    const boardSize = 3;
+    let squares = [];
+    for (let i = 0; i < boardSize; i++) {
+      let row = [];
+      for (let j = 0; j < boardSize; j++) {
+        row.push(this.renderSquare(i *boardSize + j));        
+      }
+      squares.push(<div key={i} className ='board-row'>{row}</div>);
+    }
+
+
     // const status = 'Next player: X';
     // const status = `Next player: ${this.state.xIsNext ? ' X' : 'O'}`;
     // const winner = calculateWinner(this.state.squares);
@@ -97,7 +111,7 @@ class Board extends React.Component {
     return (
       <div>
         {/* <div className="status">{status}</div> */}
-        <div className="board-row">
+        {/* <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
           {this.renderSquare(2)}
@@ -111,7 +125,8 @@ class Board extends React.Component {
           {this.renderSquare(6)}
           {this.renderSquare(7)}
           {this.renderSquare(8)}
-        </div>
+        </div> */}
+        {squares}
       </div>
     );
   }
@@ -126,7 +141,14 @@ class InicialCompact extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      isAscending: true,
     }
+  }
+
+  handleSortClick =()=>{
+    this.setState({
+      isAscending: !this.state.isAscending
+    });
   }
 
   handleClick =(i)=>{
@@ -171,6 +193,12 @@ class InicialCompact extends React.Component {
 
     winner ? status = ` Winner: ${winner}` : status = `Next player: ${this.state.xIsNext ? ' X' : 'O'}`;
 
+    const isAscending = this.state.isAscending;
+
+    if(!isAscending){
+      moves.reverse();
+    }
+
     return (
       <div className="game">
         <div className="game-board">
@@ -181,6 +209,9 @@ class InicialCompact extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <button onClick={this.handleSortClick}>
+            {isAscending ? 'descending': 'ascending'}
+          </button>
           <ol>{moves}</ol>
         </div>
       </div>
